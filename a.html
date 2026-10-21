@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tu invitación</title>
+<link rel="stylesheet" href="css/estilos.css">
+</head>
+<body class="centrado">
+<main class="caja invitacion">
+  <p id="cargando" class="tenue">Cargando tu invitación…</p>
+
+  <div id="error" hidden>
+    <h1>Enlace no válido</h1>
+    <p class="tenue">Revisa que hayas abierto el enlace completo que te enviaron.</p>
+  </div>
+
+  <div id="contenido" hidden>
+    <span class="tenue">Invitación para</span>
+    <h1 id="nombre"></h1>
+    <p id="estado" class="estado-grande"></p>
+    <div id="botones" class="botones">
+      <button id="btn-si" class="primario">Confirmo mi asistencia</button>
+      <button id="btn-no">No podré asistir</button>
+    </div>
+    <p id="mensaje" role="status"></p>
+    <p id="limite" class="tenue"></p>
+  </div>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
+<script src="js/config.js"></script>
+<script src="js/supabase.js"></script>
+<script src="js/invitacion.js"></script>
+</body>
+</html>

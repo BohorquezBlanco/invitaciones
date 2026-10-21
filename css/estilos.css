@@ -1,0 +1,58 @@
+:root{--fondo:#f5f6f4;--tarjeta:#fff;--texto:#1d2a27;--tenue:#6b7a76;--linea:#dfe4e1;--acento:#0f6b5c;--si:#0f6b5c;--no:#b4432f;--foco:0 0 0 3px #0f6b5c33}
+@media(prefers-color-scheme:dark){:root{--fondo:#121816;--tarjeta:#1b2421;--texto:#e6ece9;--tenue:#8fa09a;--linea:#2c3834;--acento:#3fb89f;--si:#3fb89f;--no:#e57a65;--foco:0 0 0 3px #3fb89f44}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--fondo);color:var(--texto);font:16px/1.5 "Segoe UI",system-ui,-apple-system,sans-serif}
+[hidden]{display:none!important}
+h1,h2{margin:0;font-weight:650;letter-spacing:-.01em}
+button,input,select{font:inherit;color:inherit}
+button{background:var(--tarjeta);border:1px solid var(--linea);border-radius:8px;padding:.45rem .8rem;cursor:pointer}
+button:hover{border-color:var(--acento)}
+:focus-visible{outline:none;box-shadow:var(--foco);border-color:var(--acento)}
+input,select{background:var(--tarjeta);border:1px solid var(--linea);border-radius:8px;padding:.55rem .7rem;width:100%}
+label{display:block;font-size:.9rem;color:var(--tenue);margin-bottom:1rem}
+label input{margin-top:.25rem;color:var(--texto)}
+.primario{background:var(--acento);border-color:var(--acento);color:#fff}
+@media(prefers-color-scheme:dark){.primario{color:#06201a}}
+.peligro{color:var(--no)}
+.centrado{min-height:100vh;display:grid;place-items:center;padding:1rem}
+.caja{background:var(--tarjeta);border:1px solid var(--linea);border-radius:14px;padding:2rem;width:100%;max-width:400px}
+.caja h1{margin-bottom:1.25rem}
+.error-texto{color:var(--no);min-height:1.2em;margin:.5rem 0 0}
+.barra{display:flex;justify-content:space-between;align-items:center;gap:1rem;padding:1rem 1.5rem;border-bottom:1px solid var(--linea);background:var(--tarjeta);flex-wrap:wrap}
+.barra .tenue{margin-right:.75rem}
+main{max-width:1100px;margin:0 auto;padding:1.5rem}
+.resumen{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-bottom:1.5rem}
+.resumen div{background:var(--tarjeta);border:1px solid var(--linea);border-radius:12px;padding:1rem}
+.resumen b{display:block;font-size:1.9rem;line-height:1.1}
+.resumen span,.tenue{color:var(--tenue);font-size:.9rem}
+.herramientas{display:flex;gap:.75rem;margin-bottom:1rem;flex-wrap:wrap}
+.herramientas input{flex:1;min-width:200px}
+.herramientas select{width:auto}
+.limite{display:flex;gap:.5rem;align-items:end;margin-bottom:1.5rem;flex-wrap:wrap}
+.limite label{margin:0}
+.limite input{width:auto}
+.tabla-caja{background:var(--tarjeta);border:1px solid var(--linea);border-radius:12px;overflow-x:auto}
+table{width:100%;border-collapse:collapse;min-width:760px}
+th{text-align:left;font-size:.85rem;color:var(--tenue);font-weight:500}
+th,td{padding:.75rem 1rem;border-bottom:1px solid var(--linea)}
+tr:last-child td{border-bottom:0}
+.acciones{display:flex;gap:.4rem;justify-content:flex-end}
+.acciones button{padding:.3rem .6rem;font-size:.85rem}
+.estado{border-radius:99px;font-size:.85rem;padding:.25rem .8rem}
+.estado.si{background:color-mix(in srgb,var(--si) 15%,transparent);border-color:var(--si);color:var(--si)}
+.estado.no{background:color-mix(in srgb,var(--no) 12%,transparent);border-color:var(--no);color:var(--no)}
+.vacio{text-align:center;color:var(--tenue);padding:2rem}
+dialog{border:1px solid var(--linea);border-radius:14px;background:var(--tarjeta);color:var(--texto);width:min(440px,92vw);padding:1.5rem}
+dialog::backdrop{background:#0008}
+.check{display:flex;align-items:center;gap:.5rem;color:var(--texto)}
+.check input{width:auto;margin:0}
+.pie-modal{display:flex;justify-content:flex-end;gap:.5rem}
+.aviso{position:fixed;bottom:1.25rem;left:50%;transform:translateX(-50%);padding:.6rem 1.1rem;border-radius:8px;color:#fff;opacity:0;pointer-events:none;transition:opacity .2s}
+.aviso.visible{opacity:1}.aviso.ok{background:var(--si)}.aviso.error{background:var(--no)}
+@media(prefers-color-scheme:dark){.aviso{color:#06201a}}
+.invitacion{text-align:center;max-width:460px}
+.invitacion h1{font-size:1.8rem;margin:.25rem 0 .5rem}
+.estado-grande{font-size:1.1rem;margin:1rem 0 .25rem}
+.botones{display:flex;gap:.75rem;justify-content:center;flex-wrap:wrap;margin:1.5rem 0 .5rem}
+.botones button{padding:.7rem 1.4rem}
+@media(max-width:600px){.resumen b{font-size:1.4rem}main{padding:1rem}}

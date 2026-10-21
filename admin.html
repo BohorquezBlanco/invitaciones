@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Centro de invitados</title>
+<link rel="stylesheet" href="css/estilos.css">
+</head>
+<body>
+
+<!-- LOGIN -->
+<section id="vista-login" class="centrado" hidden>
+  <form id="form-login" class="caja">
+    <h1>Centro de invitados</h1>
+    <label>Correo<input id="email" type="email" required autocomplete="username"></label>
+    <label>Contraseña<input id="password" type="password" required autocomplete="current-password"></label>
+    <button class="primario" style="width:100%">Entrar</button>
+    <p id="login-error" class="error-texto"></p>
+  </form>
+</section>
+
+<!-- PANEL -->
+<section id="vista-panel" hidden>
+  <header class="barra">
+    <h2>Centro de invitados</h2>
+    <div><span id="usuario" class="tenue"></span><button id="btn-salir">Salir</button></div>
+  </header>
+
+  <main>
+    <div class="resumen">
+      <div><b id="total">0</b><span>Invitados</span></div>
+      <div><b id="confirmados">0</b><span>Confirmados</span></div>
+      <div><b id="no-confirmados">0</b><span>No confirmados</span></div>
+    </div>
+
+    <div class="limite">
+      <label>Fecha límite para responder
+        <input id="fecha-limite" type="datetime-local"></label>
+      <button id="btn-guardar-limite">Guardar fecha</button>
+    </div>
+
+    <div class="herramientas">
+      <input id="buscar" type="search" placeholder="Buscar por nombre o teléfono">
+      <select id="filtro-estado" aria-label="Filtrar por estado">
+        <option value="todos">Todos</option>
+        <option value="si">Confirmados</option>
+        <option value="no">No confirmados</option>
+      </select>
+      <button id="btn-agregar" class="primario">Agregar invitado</button>
+    </div>
+
+    <div class="tabla-caja">
+      <table>
+        <thead><tr><th>Invitado</th><th>Teléfono</th><th>Estado</th><th>Respondió</th><th></th></tr></thead>
+        <tbody id="tabla"></tbody>
+      </table>
+    </div>
+  </main>
+</section>
+
+<!-- MODAL -->
+<dialog id="modal">
+  <form id="form-invitado">
+    <h2 id="modal-titulo" style="margin-bottom:1rem"></h2>
+    <input type="hidden" id="f-id">
+    <label>Nombres<input id="f-nombres" required></label>
+    <label>Apellidos<input id="f-apellidos" required></label>
+    <label>Teléfono<input id="f-telefono" type="tel" placeholder="+591 7xxxxxxx"></label>
+    <label class="check"><input id="f-reserva" type="checkbox"> Confirmado</label>
+    <div class="pie-modal">
+      <button type="button" id="btn-cancelar">Cancelar</button>
+      <button class="primario">Guardar invitado</button>
+    </div>
+  </form>
+</dialog>
+
+<div id="aviso" class="aviso" role="status"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
+<script src="js/config.js"></script>
+<script src="js/supabase.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/invitados.js"></script>
+<script src="js/admin.js"></script>
+</body>
+</html>
