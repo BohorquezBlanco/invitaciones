@@ -16,7 +16,7 @@ function mostrarError() { $('#cargando').hidden = true; $('#error').hidden = fal
 function pintar() {
   $('#cargando').hidden = true; $('#contenido').hidden = false;
   $('#nombre').textContent = `${datos.nombres} ${datos.apellidos}`;
-  $('#estado').textContent = !datos.fecha_reserva ? 'Aún no has respondido'
+  $('#estado').textContent = !datos.fecha_reserva ? 'Confirmar porfavor su asistencia presionando el boton'
     : datos.reserva ? 'Asistencia confirmada' : 'Has indicado que no asistirás';
   $('#limite').textContent = datos.puede_modificar
     ? `Puedes cambiar tu respuesta hasta el ${fmt(datos.fecha_limite)}.`

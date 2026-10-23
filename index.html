@@ -31,6 +31,7 @@
       <div><b id="total">0</b><span>Invitados</span></div>
       <div><b id="confirmados">0</b><span>Confirmados</span></div>
       <div><b id="no-confirmados">0</b><span>No confirmados</span></div>
+      <div><b id="personas-confirmadas">0</b><span>Personas confirmadas</span></div>
     </div>
 
     <div class="limite">
@@ -51,7 +52,7 @@
 
     <div class="tabla-caja">
       <table>
-        <thead><tr><th>Invitado</th><th>Teléfono</th><th>Estado</th><th>Respondió</th><th></th></tr></thead>
+        <thead><tr><th>Invitado</th><th>Teléfono</th><th>Personas</th><th>Estado</th><th>Respondió</th><th></th></tr></thead>
         <tbody id="tabla"></tbody>
       </table>
     </div>
@@ -66,6 +67,8 @@
     <label>Nombres<input id="f-nombres" required></label>
     <label>Apellidos<input id="f-apellidos" required></label>
     <label>Teléfono<input id="f-telefono" type="tel" placeholder="+591 7xxxxxxx"></label>
+    <label>Complemento<input id="f-complemento" placeholder="Ej: y Sra., y esposo e hijos"></label>
+    <label>Cantidad de personas<input id="f-cantidad" type="number" min="1" value="1" required></label>
     <label class="check"><input id="f-reserva" type="checkbox"> Confirmado</label>
     <div class="pie-modal">
       <button type="button" id="btn-cancelar">Cancelar</button>

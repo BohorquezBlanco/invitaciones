@@ -31,16 +31,20 @@ function pintar() {
   $('#total').textContent = lista.length;
   $('#confirmados').textContent = conf;
   $('#no-confirmados').textContent = lista.length - conf;
+  $('#personas-confirmadas').textContent = lista
+    .filter(i => i.reserva)
+    .reduce((s, i) => s + (i.cantidad ?? 1), 0);
 
   const q = filtro.toLowerCase();
   const filas = lista.filter(i =>
     (estado === 'todos' || (estado === 'si') === i.reserva) &&
-    `${i.nombres} ${i.apellidos} ${i.telefono ?? ''}`.toLowerCase().includes(q));
+    `${i.nombres} ${i.apellidos} ${i.complemento ?? ''} ${i.telefono ?? ''}`.toLowerCase().includes(q));
 
   $('#tabla').innerHTML = filas.length ? filas.map(i => `
     <tr>
-      <td><strong>${esc(i.nombres)} ${esc(i.apellidos)}</strong></td>
+      <td><strong>${esc(i.nombres)} ${esc(i.apellidos)}</strong>${i.complemento ? ` <span class="tenue">${esc(i.complemento)}</span>` : ''}</td>
       <td>${esc(i.telefono) || '—'}</td>
+      <td>${i.cantidad ?? 1}</td>
       <td><button class="estado ${i.reserva ? 'si' : 'no'}" data-accion="estado" data-id="${i.id}">
         ${i.reserva ? 'Confirmado' : 'No confirmado'}</button></td>
       <td class="tenue">${fmt(i.fecha_reserva)}</td>
@@ -49,7 +53,7 @@ function pintar() {
         <button data-accion="editar" data-id="${i.id}">Editar</button>
         <button class="peligro" data-accion="eliminar" data-id="${i.id}">Eliminar</button>
       </td>
-    </tr>`).join('') : '<tr><td colspan="5" class="vacio">No hay invitados. Agrega el primero con “Agregar invitado”.</td></tr>';
+    </tr>`).join('') : '<tr><td colspan="6" class="vacio">No hay invitados. Agrega el primero con “Agregar invitado”.</td></tr>';
 }
 
 function abrirModal(i) {
@@ -58,6 +62,8 @@ function abrirModal(i) {
   $('#f-nombres').value = i?.nombres ?? '';
   $('#f-apellidos').value = i?.apellidos ?? '';
   $('#f-telefono').value = i?.telefono ?? '';
+  $('#f-complemento').value = i?.complemento ?? '';
+  $('#f-cantidad').value = i?.cantidad ?? 1;
   $('#f-reserva').checked = !!i?.reserva;
   $('#modal').showModal();
 }
@@ -69,6 +75,8 @@ $('#form-invitado').addEventListener('submit', async (e) => {
     nombres: $('#f-nombres').value.trim(),
     apellidos: $('#f-apellidos').value.trim(),
     telefono: $('#f-telefono').value.trim() || null,
+    complemento: $('#f-complemento').value.trim() || null,
+    cantidad: Math.max(1, parseInt($('#f-cantidad').value, 10) || 1),
     reserva: $('#f-reserva').checked
   };
   try {
