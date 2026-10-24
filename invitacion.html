@@ -420,57 +420,26 @@ body.conimg .solo-svg{display:none}   /* piel/cabello solo sirven para el dibujo
    <rect x="-12" y="-45" width="24" height="9" rx="3" fill="#ea580c"/><rect x="-12" y="-41" width="24" height="2" fill="#fdba74"/> <!-- manta -->
    <g class="load"><rect x="-11" y="-53" width="12" height="8" rx="1" fill="#c2410c"/><rect x="2" y="-53" width="12" height="8" rx="1" fill="#9a3412"/><rect x="-5" y="-61" width="12" height="8" rx="1" fill="#78716c"/></g> <!-- ladrillos -->
   </g></g></g>
-  <!-- 👷 OBRERO EN EL TECHO (aparece junto con el techo). Posición: translate(285 148) · tamaño: scale(.8) -->
-  <g class="brick" style="animation-delay:8.2s">
-   <rect x="248" y="147" width="78" height="5" rx="1" fill="#a16207"/> <!-- tablón del andamio -->
-   <rect x="252" y="152" width="4" height="110" fill="#a16207"/><rect x="318" y="152" width="4" height="110" fill="#a16207"/> <!-- postes -->
-   <g transform="translate(285 148) scale(.8)"><g class="mn">
+   <!-- 👷 OBRERO: construye la pared desde el lado derecho, junto con la obrera.
+       Posición: translate(462 262) · scale(-.8 .8) lo voltea para que mire a la izquierda -->
+  <g class="brick" style="animation-delay:.6s">
+   <g transform="translate(462 262) scale(-.8 .8)"><g class="mn">
    <ellipse rx="24" ry="3" fill="#0002"/>
    <rect x="-10" y="-36" width="9" height="34" rx="3" fill="#1c1917"/><rect x="1" y="-36" width="9" height="34" rx="3" fill="#292524"/> <!-- piernas -->
    <rect x="-12" y="-6" width="12" height="6" rx="2" fill="#0c0a09"/><rect x="1" y="-6" width="13" height="6" rx="2" fill="#0c0a09"/> <!-- botas -->
-   <path d="M-13 -36L-11 -73Q0 -79 11 -73L13 -36Z" fill="#292524"/><rect x="-12" y="-54" width="24" height="4" fill="#ea580c"/> <!-- torso y franja del chaleco -->
+   <path d="M-13 -36L-11 -73Q0 -79 11 -73L13 -36Z" fill="#292524"/><rect x="-12" y="-54" width="24" height="4" fill="#ea580c"/> <!-- torso y chaleco -->
    <rect x="-13" y="-41" width="26" height="5" fill="#78716c"/><rect x="6" y="-39" width="8" height="10" rx="1.5" fill="#57534e"/> <!-- cinturón y bolsa -->
    <path d="M-11 -70Q-19 -56 -14 -44" stroke="#44403c" stroke-width="6" fill="none" stroke-linecap="round"/> <!-- brazo quieto -->
-   <rect x="-3" y="-81" width="6" height="7" fill="#57534e"/><circle cy="-89" r="10" fill="#57534e"/>   <!-- cuello y cara -->
-   <circle cx="-3.5" cy="-90" r="1.1" fill="#fff"/><circle cx="3.5" cy="-90" r="1.1" fill="#fff"/><path d="M-4 -85Q0 -82 4 -85" stroke="#fff" stroke-opacity=".5" fill="none"/> <!-- ojos y sonrisa -->
+   <rect x="-3" y="-81" width="6" height="7" fill="#57534e"/><circle cy="-89" r="10" fill="#57534e"/> <!-- cuello y cara -->
+   <circle cx="-3.5" cy="-90" r="1.1" fill="#fff"/><circle cx="3.5" cy="-90" r="1.1" fill="#fff"/><path d="M-4 -85Q0 -82 4 -85" stroke="#fff" stroke-opacity=".5" fill="none"/>
    <path d="M-12 -92A12 11 0 0 1 12 -92Z" fill="#ea580c"/><rect x="-14" y="-93" width="28" height="3" rx="1.5" fill="#c2410c"/> <!-- casco -->
    <g transform="translate(9 -68)"><g class="arm"><rect y="-3" width="30" height="6" rx="3" fill="#44403c"/><rect x="30" y="-20" width="4" height="26" rx="1.5" fill="#a16207"/><rect x="25" y="-24" width="16" height="9" rx="2" fill="#78716c"/></g></g> <!-- brazo + martillo -->
-   <text class="spk" x="47" y="-76" font-size="11">✦</text>                                   <!-- chispa -->
+   <text class="spk" x="47" y="-76" font-size="11">✦</text> <!-- chispa -->
    </g></g>
   </g>
 
-  <!-- 👷‍♀️ OBRERA DE ABAJO: coloca ladrillos en la pared.
-       Posición: translate(205 262) · tamaño: scale(.85) · aparece mientras se construye la pared -->
-  <g class="brick" style="animation-delay:.6s">
-   <g transform="translate(205 262) scale(.85)">
-    <ellipse rx="24" ry="3" fill="#0002"/>
-    <!-- pila de ladrillos a sus pies -->
-    <rect x="-58" y="-8" width="14" height="8" rx="1" fill="#9a3412"/><rect x="-43" y="-8" width="14" height="8" rx="1" fill="#c2410c"/><rect x="-51" y="-16" width="14" height="8" rx="1" fill="#78716c"/>
-    <g class="ob-body">
-     <!-- piernas y botas -->
-     <g transform="translate(-4 -36)"><g class="ob-leg2"><rect x="-4" width="8" height="30" rx="3" fill="#1c1917"/><rect x="-4" y="30" width="12" height="6" rx="2" fill="#0c0a09"/></g></g>
-     <g transform="translate(4 -36)"><g class="ob-leg"><rect x="-4" width="8" height="30" rx="3" fill="#292524"/><rect x="-4" y="30" width="12" height="6" rx="2" fill="#0c0a09"/></g></g>
-     <!-- torso, cinturón y cuello -->
-     <path d="M-11 -36L-10 -68Q0 -73 10 -68L11 -36Z" fill="#c2410c"/><rect x="-11" y="-40" width="22" height="4" fill="#57534e"/>
-     <path d="M-4 -70L0 -64L4 -70" stroke="#fdba74" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-     <!-- brazo quieto -->
-     <path d="M-8 -66Q-15 -54 -10 -44" stroke="#9a3412" stroke-width="6" fill="none" stroke-linecap="round"/><circle cx="-10" cy="-43" r="3.2" fill="#d08a63"/>
-     <!-- cabeza -->
-     <rect x="-2.5" y="-76" width="5" height="7" fill="#d08a63"/><circle cy="-84" r="9.5" fill="#d08a63"/>
-     <circle cx="4.5" cy="-84" r="1.2" fill="#1c1917"/><path d="M3 -79.5Q6 -78 8 -80" stroke="#7c2d12" stroke-width="1" fill="none" stroke-linecap="round"/>
-     <!-- pelo y cola de caballo -->
-     <path d="M-10 -83A10 10.5 0 0 1 10 -85Q3 -91 -4 -88Q-9 -86 -10 -83Z" fill="#1c1917"/>
-     <g transform="translate(-8 -88)"><g class="ob-tail"><path d="M0 0Q-14 -2 -13 12Q-9 6 -2 7Z" fill="#1c1917"/></g></g>
-     <!-- brazo que coloca el ladrillo -->
-     <g transform="translate(7 -64)"><g class="ob-arm"><rect x="0" y="-3.2" width="21" height="6.4" rx="3.2" fill="#c2410c"/><rect x="22" y="-6" width="15" height="9" rx="1.2" fill="#9a3412"/><circle cx="22" cy="0" r="3.6" fill="#d08a63"/></g></g>
-    </g>
-   </g>
-  </g>
-  
-
-
 </svg></div>
- <div class="card1">
+ <div class="card">
   <!-- ✏️ EDITA AQUÍ: mensaje de regalos -->
   <h2 class="n">Su presencia es un regalo</h2>
   <p style="line-height:1.7;color:var(--suave);margin:0">Pero toda ayuda para construir nuestro hogar y cumplir nuestros sueños es bienvenida.</p>
