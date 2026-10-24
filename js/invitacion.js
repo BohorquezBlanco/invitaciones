@@ -29,7 +29,7 @@ function pintar() {
   $('#cantidad').textContent = n === 1 ? 'Invitación para 1 persona' : `Invitación para ${n} personas`;
 
   $('#estado').textContent = !datos.fecha_reserva ? 'Confirmar porfavor su asistencia presionando el boton'
-    : datos.reserva ? 'Asistencia confirmada' : 'Has indicado que no asistirás';
+    : datos.reserva ? 'Asistencia confirmada con éxito.' : 'Lamentamos que no puedas acompañarnos.';
   $('#limite').textContent = datos.puede_modificar
     ? `Puedes cambiar tu respuesta hasta el ${fmt(datos.fecha_limite)}.`
     : 'El plazo para responder ya terminó.';
@@ -39,7 +39,7 @@ function pintar() {
 
 async function responder(valor) {
   const { error } = await db.rpc('confirmar_reserva', { p_token: token, p_reserva: valor });
-  $('#mensaje').textContent = error ? error.message : valor ? '¡Gracias por confirmar!' : 'Respuesta registrada.';
+  $('#mensaje').textContent = error ? error.message : valor ? ' Agradecemos tu confirmación y nos vemos muy pronto para celebrar juntos.' : 'Agradecemos sinceramente que nos hayas notificado.';
   if (!error) await cargar();
 }
 

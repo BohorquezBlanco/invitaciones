@@ -34,8 +34,8 @@
 :root{
   --crema:#fdfbf7;      /* fondo principal (papel)            */
   --durazno:#fff7ed;    /* fondo secundario suave             */
-  --texto:#44403c;      /* color del texto                    */
-  --suave:#78716c;      /* texto secundario (grises)          */
+  --texto:#29483a;      /* color del texto                    */
+  --suave:#849477;      /* texto secundario (grises)          */
   --naranja:#ea580c;    /* color principal: títulos, acentos  */
   --rosa:#ec4899;       /* acento secundario: líneas, flecha  */
   --tarjeta:#f8f3ea;  /* fondo de las tarjetas (blanco 92%) */
@@ -45,14 +45,35 @@
 }
 
 /* ═══════════════ BASE ═══════════════ */
-*{box-sizing:border-box}
-html{scroll-padding-top:env(safe-area-inset-top,0px)}
-body{margin:0;color:var(--texto);font-family:'Lora',Georgia,serif;overflow-x:hidden;
-  background:linear-gradient(180deg,var(--crema),var(--durazno) 60%,var(--crema));
-  padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
-.t{font-family:'Cinzel',Georgia,serif}                          /* letra de títulos  */
-.n{font-family:'Great Vibes','Brush Script MT',cursive}         /* letra de nombres  */
-section,.zone{position:relative;z-index:2}                      /* contenido sobre las flores */
+* {
+  box-sizing: border-box;
+}
+html {
+  scroll-padding-top: env(safe-area-inset-top, 0px);
+}
+body {
+  margin: 0;
+  color: var(--texto);
+  /* Letra base: Cormorant Garamond (estilo editorial, orgánica y legible) con caídas serif elegantes */
+  font-family: 'Cormorant Garamond', 'Merriweather', 'Georgia', serif;
+  overflow-x: hidden;
+  background: linear-gradient(180deg, var(--crema), var(--durazno) 60%, var(--crema));
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+.t {
+  /* Letra de títulos: Cinzel para un toque clásico, con caídas tradicionales */
+  font-family: 'Cinzel', 'Playfair Display', 'Georgia', serif;
+}                          /* letra de títulos  */
+.n {
+  /* Letra de nombres: Caligráfica y fluida, ideal para la temática floral */
+  font-family: 'Great Vibes', 'Alex Brush', 'Brush Script MT', cursive;
+}         /* letra de nombres  */
+section, .zone {
+  position: relative;
+  z-index: 2;
+}                      /* contenido sobre las flores */
+
 
 /* ═══════════════ 🌸 FLORES DE LAS ESQUINAS ═══════════════
    Tamaño: cambia width (340px = máximo en PC, 44vw = % de pantalla en celular) */
@@ -70,7 +91,7 @@ h1 small{font-size:.5em;color:var(--rosa)}
 h2{font-weight:400;font-size:clamp(2.3rem,8vw,3.3rem);color:var(--naranja);margin:0 0 1rem}
 .sep{width:70px;height:3px;border-radius:3px;background:linear-gradient(90deg,var(--naranja),var(--rosa));margin:1.6rem auto}
 .info p{margin:.5rem 0}
-.chips{background:linear-gradient(135deg,#fff7ed,#fdf2f8);border-radius:12px;padding:1rem;font-size:.9rem;color:var(--suave);
+.chips{background:none;border-radius:12px; border: 1px solid #EFE0CD;padding:2rem;font-size:.9rem;color:var(--suave);
   display:flex;flex-wrap:wrap;gap:.5rem 1.2rem;justify-content:center;margin-top:1.6rem}
 .hint{margin-top:1.8rem;color:var(--rosa);font-size:.75rem;letter-spacing:.2em;animation:bob 1.6s infinite}
 @keyframes bob{50%{transform:translateY(8px)}}
@@ -141,11 +162,27 @@ h2{font-weight:400;font-size:clamp(2.3rem,8vw,3.3rem);color:var(--naranja);margi
 .heart img.up{width:64px;height:64px;object-fit:contain;display:block}
 body.edit .heart{transform:translate(-50%,0) scale(1);opacity:1}
 .thx{margin-top:2rem;font-style:italic;color:var(--suave);opacity:0;transition:opacity .6s;font-size:1.1rem}
+.separador-romantico{display: flex; align-items: center; justify-content: center; gap: 18px; margin:22px auto;}
+.separador-romantico .linea {width: 100px; height: 1.5px;background: #c7653F;}
+.separador-romantico .corazon {font-family: Georgia, 'Times New Roman', Times, serif; font-size: 25px; color: #E88B70; line-height: 1;}
+.linea-decorada {
+    display: inline-flex;       /* Fuerza la alineación en una sola línea horizontal */
+    align-items: center;        /* Centra verticalmente las hojas respecto al texto */
+    justify-content: center;   /* Centra todo el conjunto en la pantalla */
+    gap: 12px;                  /* Controla la separación entre las hojas y el texto */
+    width: 100%;                /* Asegura que use el espacio disponible */
+}
+
+/* Evita que el h2 rompa la línea */
+.complemento {
+    display: inline;
+    margin: 0;                  /* Elimina márgenes ocultos que empujan los elementos */
+}
 
 /* ═══════════════ 📸 ÁLBUM DE FOTOS ═══════════════ */
 .btns{display:flex;gap:.7rem;justify-content:center;flex-wrap:wrap;margin-top:1.2rem}
 .btn{padding:.7rem 1.3rem;border-radius:999px;color:#fff!important;text-decoration:none;font-weight:600;background:linear-gradient(135deg,var(--naranja),var(--rosa))}
-.btn.alt{background:linear-gradient(135deg,#292524,#57534e)}
+.btn.alt{background:linear-gradient(135deg,#29483a,#57534e)}
 .btn.off{opacity:.45;pointer-events:none}
 .qr{width:200px;height:200px;margin:1.2rem auto 0;background:#fff;border:3px solid #292524;border-radius:14px;padding:10px;display:grid;place-items:center;font-size:.8rem;color:var(--suave)}
 .qr img,.qr canvas{max-width:100%}
@@ -165,7 +202,7 @@ body.edit .heart{transform:translate(-50%,0) scale(1);opacity:1}
 .load{animation:ld 7s infinite}@keyframes ld{0%,46%{opacity:1}50%,98%{opacity:0}100%{opacity:1}} /* deja los ladrillos al llegar */
 .lg{transform-box:fill-box;transform-origin:50% 0;animation:wk .5s ease-in-out infinite alternate}.lg.b{animation-direction:alternate-reverse}@keyframes wk{from{transform:rotate(-18deg)}to{transform:rotate(18deg)}}
 .spk{fill:var(--naranja);animation:bl .5s infinite alternate}@keyframes bl{from{opacity:0}to{opacity:1}}
-.qrbox{width:210px;height:210px;margin:1.2rem auto .6rem;border:3px solid var(--naranja);border-radius:14px;display:grid;place-items:center;
+.qrbox{width:210px;height:210px;margin:1.2rem auto .6rem;border:1px solid var(--durazno);border-radius:14px;display:grid;place-items:center;
   background:#fff;position:relative;overflow:hidden;font-size:.85rem;color:var(--suave);padding:.8rem}
 .qrbox img.up{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:#fff}
 .small{font-size:.8rem;color:var(--suave)}
@@ -253,17 +290,18 @@ body.conimg .solo-svg{display:none}   /* piel/cabello solo sirven para el dibujo
 <!-- ═══════════════ 2. CRONOGRAMA ═══════════════ -->
 <section class="wrap"><div class="card">
  <h2 class="n">Cronograma del día</h2>
+ <p>Aunque sabemos que los cronogramas casi nunca se cumplen, tenemos una referencia</p>
  <!-- ✏️ EDITA AQUÍ: horas y actividades. Para agregar una, copia una línea <li>…</li> -->
  <ol class="tline">
 
     <li><b>14:00</b><div>Ceremonia religiosa<span>Celebración y bendición de nuestro matrimonio</span></div></li>
-    <li><b>15:00</b><div>Merienda en la iglesia<span>Compartimos un momento especial en familia</span></div></li>
     <li><b>16:30</b><div>Recepción en el salon de eventos<span>Bienvenida y encuentro con familiares y amigos</span></div></li>
-    <li><b>17:00</b><div>Brindis de los novios<span>Un brindis por nuestro amor y nueva vida juntos</span></div></li>
-    <li><b>17:30</b><div>Comida principal<span>Compartimos la mesa con nuestros seres queridos</span></div></li>
+    <li><b>17:00</b><div>Comida principal<span>Compartimos la mesa con nuestros seres queridos</span></div></li>
     <li><b>18:00</b><div>Vals de los novios<span>Un momento especial para celebrar nuestro amor</span></div></li>
-    <li><b>19:00</b><div>Agradecimientos<span>Palabras de gratitud a nuestros familiares y amigos</span></div></li>
+    <li><b>19:00</b><div>Brindis de los novios<span>Un brindis por nuestro amor y nueva vida juntos</span></div></li>
+    <li><b>19:30</b><div>Agradecimientos<span>Palabras de gratitud a nuestros familiares y amigos</span></div></li>
     <li><b>20:00</b><div>Convivencia y actividades<span>Juegos, música y momentos especiales para compartir</span></div></li>
+    <li><b>22:00</b><div>Fin de la velada</div></li>
 
  </ol>
 </div></section>
@@ -308,6 +346,11 @@ body.conimg .solo-svg{display:none}   /* piel/cabello solo sirven para el dibujo
 <!-- ═══════════════ 4. ACEPTAR INVITACION) ═══════════════ -->
 <section class="wrap"><div class="card">
   <h2 class="n">Confirma tu participación</h2>
+  <div class="separador-romantico">
+    <span class="linea"></span>
+    <span class="corazon">❤️</span>
+    <span class="linea"></span>
+  </div>
   <main class="caja invitacion">
     <p id="cargando" class="tenue">Cargando tu invitación…</p>
 
@@ -318,9 +361,12 @@ body.conimg .solo-svg{display:none}   /* piel/cabello solo sirven para el dibujo
 
     <div id="contenido" hidden>
       <span class="tenue">Invitación para</span>
-      <h1 id="nombre"></h1>
+      <h1 id="nombre" style="font-family: 'Cormorant Garamond', serif; background: linear-gradient(to bottom, var(--naranja), #e88B70); -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: inline-block;"></h1>
 
-      <h2  id="complemento" class="complemento n"></h2>
+      <div class="linea-decorada"><span>🌿</span><h2 id="complemento" class="complemento n">Invitación para</h2><span>🌿</span></div>
+
+</div>
+
 
       <p id="cantidad" class="tenue complemento" id="complemento" ></p>
 
@@ -328,6 +374,11 @@ body.conimg .solo-svg{display:none}   /* piel/cabello solo sirven para el dibujo
       <div id="botones" class="btns">
         <button id="btn-si" class="btn">Confirmo mi asistencia</button>
         <button id="btn-no" class="btn alt">No podré asistir</button>
+      </div>
+      <div class="separador-romantico">
+        <span class="linea"></span>
+        <span class="corazon">❤️</span>
+        <span class="linea"></span>
       </div>
       <p id="mensaje" role="status"></p>
       <p id="limite" class="tenue"></p>
@@ -381,7 +432,7 @@ body.conimg .solo-svg{display:none}   /* piel/cabello solo sirven para el dibujo
  <div class="card">
   <!-- ✏️ EDITA AQUÍ: mensaje de regalos -->
   <h2 class="n">Su presencia es un regalo</h2>
-  <p style="line-height:1.7;color:var(--suave);margin:0">Pero si desean ayudarnos a cumplir nuestros sueños y construir nuestro primer hogar, pueden hacerlo con un depósito.</p>
+  <p style="line-height:1.7;color:var(--suave);margin:0">Pero toda ayuda para construir nuestro hogar y cumplir nuestros sueños es bienvenida.</p>
   <!-- 💳 QR de depósito: sube la imagen de tu banco con CONFIG.IMAGENES.qrDeposito -->
   <div class="qrbox" data-slot="qrDeposito"><span class="def">QR de depósito próximamente</span></div>
   <p class="small">Escanea el QR desde la app de tu banco.<br>¡Gracias por ser parte de nuestro hogar! 🏡</p>
@@ -413,7 +464,7 @@ const CONFIG = {
     novia:      'img/novia.png',   // imagen de la novia
     novio:      'img/novio.png',   // imagen del novio
     corazon:    '',   // imagen en lugar del emoji de corazón
-    qrDeposito: 'img/QR.jpeg'    // QR de tu banco para los depósitos
+    qrDeposito: 'img/qr2.png'    // QR de tu banco para los depósitos
   },
 
   /* 🖌️ RECOLOREO con CSS (máscaras). true = vestido, traje y detalles se pueden pintar con COLORES (abajo).
