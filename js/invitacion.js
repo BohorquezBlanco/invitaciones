@@ -15,7 +15,19 @@ function mostrarError() { $('#cargando').hidden = true; $('#error').hidden = fal
 
 function pintar() {
   $('#cargando').hidden = true; $('#contenido').hidden = false;
+
   $('#nombre').textContent = `${datos.nombres} ${datos.apellidos}`;
+
+  const comp = $('#complemento');
+  comp.textContent = datos.complemento ?? '';
+  comp.hidden = !datos.complemento;
+
+  console.log(datos.nombres);
+  
+
+  const n = datos.cantidad ?? 1;
+  $('#cantidad').textContent = n === 1 ? 'Invitación para 1 persona' : `Invitación para ${n} personas`;
+
   $('#estado').textContent = !datos.fecha_reserva ? 'Confirmar porfavor su asistencia presionando el boton'
     : datos.reserva ? 'Asistencia confirmada' : 'Has indicado que no asistirás';
   $('#limite').textContent = datos.puede_modificar
@@ -23,6 +35,7 @@ function pintar() {
     : 'El plazo para responder ya terminó.';
   $('#botones').hidden = !datos.puede_modificar;
 }
+
 
 async function responder(valor) {
   const { error } = await db.rpc('confirmar_reserva', { p_token: token, p_reserva: valor });
