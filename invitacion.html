@@ -121,13 +121,21 @@ h2{font-weight:400;font-size:clamp(2.3rem,8vw,3.3rem);color:var(--naranja);margi
 }
 
 /* ═══════════════ ⏰ CRONOGRAMA ═══════════════ */
-.tline{list-style:none;margin:0;padding:0;text-align:left;position:relative}
+.tline{
+  list-style:none;
+  margin:0 auto;          /* centra el bloque en la tarjeta */
+  padding:0;
+  text-align:left;
+  position:relative;
+  width:fit-content;      /* el bloque mide lo que mide su contenido */
+  max-width:100%;
+}
 .tline:before{content:"";position:absolute;left:5.6rem;top:.5rem;bottom:.5rem;width:3px;border-radius:3px;
   background:linear-gradient(var(--naranja),var(--rosa),#0d9488)}
 .tline li{display:grid;grid-template-columns:4.6rem 1fr;gap:2rem;padding:.7rem 0;position:relative}
 .tline li:before{content:"";position:absolute;left:5.2rem;top:1.1rem;width:11px;height:11px;border-radius:50%;background:var(--naranja);box-shadow:0 0 0 4px #fff}
 .tline li:nth-child(even):before{background:var(--rosa)}.tline li:nth-child(3n):before{background:#0d9488}
-.tline b{font-family:'Cinzel',serif;color:var(--naranja);text-align:right}
+.tline b{font-family:'Cinzel',serif;color:var(--naranja);text-align:center}
 .tline span{display:block;font-size:.85rem;color:var(--suave)}
 
 /* ═══════════════ 💑 ESCENA DE LOS NOVIOS (se juntan al hacer scroll) ═══════════════ */
@@ -288,9 +296,8 @@ body.conimg .solo-svg{display:none}   /* piel/cabello solo sirven para el dibujo
 </div></section>
 
 <!-- ═══════════════ 2. CRONOGRAMA ═══════════════ -->
-<section class="wrap"><div class="card">
+<section class="wrap center"><div class="card">
  <h2 class="n">Cronograma del día</h2>
- <p>Aunque sabemos que los cronogramas casi nunca se cumplen, tenemos una referencia</p>
  <!-- ✏️ EDITA AQUÍ: horas y actividades. Para agregar una, copia una línea <li>…</li> -->
  <ol class="tline">
 
@@ -389,6 +396,8 @@ body.conimg .solo-svg{display:none}   /* piel/cabello solo sirven para el dibujo
 
 <!-- ═══════════════ 5. REGALO + CASA QUE SE CONSTRUYE ═══════════════ -->
 <section class="gift">
+  <br>
+  <br>
  <!-- Dibujo animado de fondo. Colores de los ladrillos: CONFIG.LADRILLOS. Otros colores: atributos fill="#..." -->
  <div class="build" aria-hidden="true"><svg viewBox="0 0 520 300">
   <rect y="262" width="520" height="38" fill="#d6d3d1"/>                                  <!-- suelo -->
@@ -428,8 +437,40 @@ body.conimg .solo-svg{display:none}   /* piel/cabello solo sirven para el dibujo
    <g transform="translate(9 -68)"><g class="arm"><rect y="-3" width="30" height="6" rx="3" fill="#44403c"/><rect x="30" y="-20" width="4" height="26" rx="1.5" fill="#a16207"/><rect x="25" y="-24" width="16" height="9" rx="2" fill="#78716c"/></g></g> <!-- brazo + martillo -->
    <text class="spk" x="47" y="-76" font-size="11">✦</text>                                   <!-- chispa -->
    </g></g>
-  </g></svg></div>
- <div class="card">
+  </g>
+
+  <!-- 👷‍♀️ OBRERA DE ABAJO: coloca ladrillos en la pared.
+       Posición: translate(205 262) · tamaño: scale(.85) · aparece mientras se construye la pared -->
+  <g class="brick" style="animation-delay:.6s">
+   <g transform="translate(205 262) scale(.85)">
+    <ellipse rx="24" ry="3" fill="#0002"/>
+    <!-- pila de ladrillos a sus pies -->
+    <rect x="-58" y="-8" width="14" height="8" rx="1" fill="#9a3412"/><rect x="-43" y="-8" width="14" height="8" rx="1" fill="#c2410c"/><rect x="-51" y="-16" width="14" height="8" rx="1" fill="#78716c"/>
+    <g class="ob-body">
+     <!-- piernas y botas -->
+     <g transform="translate(-4 -36)"><g class="ob-leg2"><rect x="-4" width="8" height="30" rx="3" fill="#1c1917"/><rect x="-4" y="30" width="12" height="6" rx="2" fill="#0c0a09"/></g></g>
+     <g transform="translate(4 -36)"><g class="ob-leg"><rect x="-4" width="8" height="30" rx="3" fill="#292524"/><rect x="-4" y="30" width="12" height="6" rx="2" fill="#0c0a09"/></g></g>
+     <!-- torso, cinturón y cuello -->
+     <path d="M-11 -36L-10 -68Q0 -73 10 -68L11 -36Z" fill="#c2410c"/><rect x="-11" y="-40" width="22" height="4" fill="#57534e"/>
+     <path d="M-4 -70L0 -64L4 -70" stroke="#fdba74" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+     <!-- brazo quieto -->
+     <path d="M-8 -66Q-15 -54 -10 -44" stroke="#9a3412" stroke-width="6" fill="none" stroke-linecap="round"/><circle cx="-10" cy="-43" r="3.2" fill="#d08a63"/>
+     <!-- cabeza -->
+     <rect x="-2.5" y="-76" width="5" height="7" fill="#d08a63"/><circle cy="-84" r="9.5" fill="#d08a63"/>
+     <circle cx="4.5" cy="-84" r="1.2" fill="#1c1917"/><path d="M3 -79.5Q6 -78 8 -80" stroke="#7c2d12" stroke-width="1" fill="none" stroke-linecap="round"/>
+     <!-- pelo y cola de caballo -->
+     <path d="M-10 -83A10 10.5 0 0 1 10 -85Q3 -91 -4 -88Q-9 -86 -10 -83Z" fill="#1c1917"/>
+     <g transform="translate(-8 -88)"><g class="ob-tail"><path d="M0 0Q-14 -2 -13 12Q-9 6 -2 7Z" fill="#1c1917"/></g></g>
+     <!-- brazo que coloca el ladrillo -->
+     <g transform="translate(7 -64)"><g class="ob-arm"><rect x="0" y="-3.2" width="21" height="6.4" rx="3.2" fill="#c2410c"/><rect x="22" y="-6" width="15" height="9" rx="1.2" fill="#9a3412"/><circle cx="22" cy="0" r="3.6" fill="#d08a63"/></g></g>
+    </g>
+   </g>
+  </g>
+  
+
+
+</svg></div>
+ <div class="card1">
   <!-- ✏️ EDITA AQUÍ: mensaje de regalos -->
   <h2 class="n">Su presencia es un regalo</h2>
   <p style="line-height:1.7;color:var(--suave);margin:0">Pero toda ayuda para construir nuestro hogar y cumplir nuestros sueños es bienvenida.</p>
@@ -464,7 +505,7 @@ const CONFIG = {
     novia:      'img/novia.png',   // imagen de la novia
     novio:      'img/novio.png',   // imagen del novio
     corazon:    '',   // imagen en lugar del emoji de corazón
-    qrDeposito: 'img/qr2.png'    // QR de tu banco para los depósitos
+    qrDeposito: 'img/qr3.jpeg'    // QR de tu banco para los depósitos
   },
 
   /* 🖌️ RECOLOREO con CSS (máscaras). true = vestido, traje y detalles se pueden pintar con COLORES (abajo).

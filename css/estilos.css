@@ -59,3 +59,17 @@ dialog::backdrop{background:#0008}
 .botones{display:flex;gap:.75rem;justify-content:center;flex-wrap:wrap;margin:1.5rem 0 .5rem}
 .botones button{padding:.7rem 1.4rem}
 @media(max-width:600px){.resumen b{font-size:1.4rem}main{padding:1rem}}
+
+
+/* 👷‍♀️ OBRERA */
+.ob-body{animation:ob-bob 1.6s ease-in-out infinite}
+.ob-leg,.ob-leg2,.ob-arm,.ob-tail{transform-origin:0 0}
+.ob-leg {animation:ob-step 1.6s ease-in-out infinite}
+.ob-leg2{animation:ob-step 1.6s ease-in-out infinite -.8s}
+.ob-arm {animation:ob-place 1.6s ease-in-out infinite}
+.ob-tail{animation:ob-sway 1.6s ease-in-out infinite}
+@keyframes ob-bob  {0%,100%{transform:translateY(0)}50%{transform:translateY(-1.2px)}}
+@keyframes ob-step {0%,100%{transform:rotate(5deg)}50%{transform:rotate(-5deg)}}
+@keyframes ob-place{0%,100%{transform:rotate(-14deg)}45%,60%{transform:rotate(6deg)}}
+@keyframes ob-sway {0%,100%{transform:rotate(4deg)}50%{transform:rotate(-8deg)}}
+@media (prefers-reduced-motion:reduce){.ob-body,.ob-leg,.ob-leg2,.ob-arm,.ob-tail{animation:none}}
