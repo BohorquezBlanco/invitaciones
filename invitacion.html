@@ -28,6 +28,17 @@
 <style>
 
  
+/* ═══════════════ 🙋 MODAL DE RESPUESTA (sin librerías) ═══════════════ */
+.mr-fondo{position:fixed;inset:0;z-index:100;display:flex;align-items:center;justify-content:center;padding:1rem;
+  background:#0008;backdrop-filter:blur(3px);opacity:0;visibility:hidden;transition:opacity .25s,visibility .25s}
+.mr-fondo.on{opacity:1;visibility:visible}
+.mr-caja{background:var(--tarjeta);max-width:420px;width:100%;padding:2rem 1.5rem;text-align:center;border-radius:18px;
+  border-top:6px solid var(--naranja);box-shadow:0 20px 40px -18px #0006;transform:translateY(16px) scale(.97);transition:transform .25s}
+.mr-fondo.on .mr-caja{transform:none}
+.mr-ico{font-size:2.6rem;line-height:1}
+.mr-tit{font-family:'Great Vibes',cursive;font-weight:400;font-size:2.4rem;color:var(--naranja);margin:.4rem 0 .6rem}
+.mr-txt{margin:0 0 1.4rem;line-height:1.6;color:var(--suave)}
+.mr-cerrar{border:0;cursor:pointer;font:inherit}
 
 
 /* ═══════════════ 🎨 COLORES DE LA PÁGINA (edítalos aquí) ═══════════════ */
