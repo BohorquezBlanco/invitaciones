@@ -258,7 +258,7 @@ body.conimg .solo-svg{display:none}   /* piel/cabello solo sirven para el dibujo
     <span class="def">💐</span>
   </div>
 
-  <!-- ✏️ EDITA AQUÍ: nombres en una sola línea -->
+  <!-- ✏️ EDITA AQUÍ: nombres en una sola línea "tt -> magic"-->
   <div>
     <h1 class="n" id="tt" style="display: flex; align-items: center; gap: 25px; margin: 0; line-height: 1;">
       <span>Samuel</span>
@@ -436,6 +436,30 @@ body.conimg .solo-svg{display:none}   /* piel/cabello solo sirven para el dibujo
    <g transform="translate(9 -68)"><g class="arm"><rect y="-3" width="30" height="6" rx="3" fill="#44403c"/><rect x="30" y="-20" width="4" height="26" rx="1.5" fill="#a16207"/><rect x="25" y="-24" width="16" height="9" rx="2" fill="#78716c"/></g></g> <!-- brazo + martillo -->
    <text class="spk" x="47" y="-76" font-size="11">✦</text> <!-- chispa -->
    </g></g>
+  </g>
+
+    <!-- 👷‍♀️ OBRERA DEL TECHO: esquina derecha, sobre un andamio.
+       Posición: translate(470 148) · scale(-.85 .85) la voltea para que mire a la casa -->
+  <g class="brick" style="animation-delay:8.2s">
+   <rect x="430" y="147" width="62" height="5" rx="1" fill="#a16207"/>   <!-- tablón (descansa sobre la pared) -->
+   <rect x="484" y="152" width="4" height="110" fill="#a16207"/>         <!-- poste -->
+   <g transform="translate(470 148) scale(-.85 .85)">
+    <ellipse rx="24" ry="3" fill="#0002"/>
+    <g class="ob-body">
+     <g transform="translate(-4 -36)"><g class="ob-leg2"><rect x="-4" width="8" height="30" rx="3" fill="#1c1917"/><rect x="-4" y="30" width="12" height="6" rx="2" fill="#0c0a09"/></g></g>
+     <g transform="translate(4 -36)"><g class="ob-leg"><rect x="-4" width="8" height="30" rx="3" fill="#292524"/><rect x="-4" y="30" width="12" height="6" rx="2" fill="#0c0a09"/></g></g>
+     <path d="M-11 -36L-10 -68Q0 -73 10 -68L11 -36Z" fill="#ea580c"/><rect x="-11" y="-40" width="22" height="4" fill="#57534e"/>
+     <path d="M-4 -70L0 -64L4 -70" stroke="#fdba74" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+     <path d="M-8 -66Q-15 -54 -10 -44" stroke="#c2410c" stroke-width="6" fill="none" stroke-linecap="round"/><circle cx="-10" cy="-43" r="3.2" fill="#d08a63"/>
+     <rect x="-2.5" y="-76" width="5" height="7" fill="#d08a63"/><circle cy="-84" r="9.5" fill="#d08a63"/>
+     <circle cx="4.5" cy="-84" r="1.2" fill="#1c1917"/><path d="M3 -79.5Q6 -78 8 -80" stroke="#7c2d12" stroke-width="1" fill="none" stroke-linecap="round"/>
+     <path d="M-10 -83A10 10.5 0 0 1 10 -85Q3 -91 -4 -88Q-9 -86 -10 -83Z" fill="#1c1917"/>
+     <g transform="translate(-8 -88)"><g class="ob-tail"><path d="M0 0Q-14 -2 -13 12Q-9 6 -2 7Z" fill="#1c1917"/></g></g>
+     <!-- brazo con martillo (usa la clase .arm que ya existe) -->
+     <g transform="translate(7 -64)"><g class="arm"><rect y="-3" width="26" height="6" rx="3" fill="#c2410c"/><rect x="26" y="-20" width="4" height="26" rx="1.5" fill="#a16207"/><rect x="21" y="-24" width="16" height="9" rx="2" fill="#78716c"/></g></g>
+     <text class="spk" x="40" y="-76" font-size="11">✦</text>
+    </g>
+   </g>
   </g>
 
 </svg></div>
