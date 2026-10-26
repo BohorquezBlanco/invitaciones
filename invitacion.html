@@ -473,6 +473,77 @@ body.conimg .solo-svg{display:none}   /* piel/cabello solo sirven para el dibujo
  </div>
 </section>
 
+<script>
+(function () {
+  // Crea el modal si no existe
+  function crearModal() {
+    if (document.getElementById('mrFondo')) return;
+    var d = document.createElement('div');
+    d.className = 'mr-fondo';
+    d.id = 'mrFondo';
+    d.setAttribute('role', 'dialog');
+    d.setAttribute('aria-modal', 'true');
+    d.innerHTML =
+      '<div class="mr-caja">' +
+        '<div class="mr-ico" id="mrIco">🎉</div>' +
+        '<h3 class="mr-tit" id="mrTit"></h3>' +
+        '<p class="mr-txt" id="mrTxt"></p>' +
+        '<button type="button" class="btn mr-cerrar" id="mrCerrar">Cerrar</button>' +
+      '</div>';
+    document.body.appendChild(d);
+  }
+
+  var $ = function (i) { return document.getElementById(i); };
+  var esperando = false, ultimo = '', timer = null;
+
+  function abrir(ico, titulo, texto) {
+    crearModal();
+    $('mrIco').textContent = ico;
+    $('mrTit').textContent = titulo;
+    $('mrTxt').textContent = texto;
+    $('mrFondo').classList.add('on');
+  }
+  function cerrar() {
+    var f = $('mrFondo');
+    if (f) f.classList.remove('on');
+  }
+
+  window.mostrarModal = function (texto) {
+    var t = (texto || '').toLowerCase();
+    if (t.indexOf('confirmaci') !== -1)      abrir('🎉', '¡Gracias!', texto);
+    else if (t.indexOf('notificado') !== -1) abrir('💌', 'Gracias por avisarnos', texto);
+    else                                     abrir('⚠️', 'Ups…', texto);
+  };
+
+  function revisar() {
+    var m = $('mensaje');
+    var texto = m ? m.textContent.trim() : '';
+    if (esperando && texto && texto !== ultimo) {
+      esperando = false;
+      clearInterval(timer);
+      ultimo = texto;
+      window.mostrarModal(texto);
+    }
+  }
+
+  document.addEventListener('click', function (e) {
+    var b = e.target.closest && e.target.closest('#btn-si, #btn-no');
+    if (b) {
+      esperando = true;
+      ultimo = ($('mensaje') && $('mensaje').textContent.trim()) || '';
+      clearInterval(timer);
+      var n = 0;
+      timer = setInterval(function () { revisar(); if (++n > 40) clearInterval(timer); }, 250);
+    }
+    if (e.target.id === 'mrCerrar' || e.target.id === 'mrFondo') cerrar();
+  }, true);
+
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') cerrar(); });
+
+  document.addEventListener('DOMContentLoaded', crearModal);
+})();
+</script>
+
 <!-- ╔═══════════════════════════════════════════════════════════════════╗
      ║  ⚙️ CONFIG: AQUÍ CAMBIAS IMÁGENES, COLORES Y ENLACES              ║
      ╚═══════════════════════════════════════════════════════════════════╝ -->
