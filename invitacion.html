@@ -51,7 +51,7 @@
   --rosa:#ec4899;       /* acento secundario: líneas, flecha  */
   --tarjeta:#f8f3ea;  /* fondo de las tarjetas (blanco 92%) */
 
-  /* Colores de los novios: los valores reales se leen de CONFIG.COLORES (más abajo) */
+  /* Colores de los novios: los valores reales se leen de BODA.COLORES (más abajo) */
   --dress:#4b5563; --suit:#1f2937; --skin:#374151; --hair:#111827; --acc:#ea580c;
 }
 
@@ -164,7 +164,7 @@ h2{font-weight:400;font-size:clamp(2.3rem,8vw,3.3rem);color:var(--naranja);margi
 /* 🖌️ RECOLOREO CSS de las ilustraciones: capas de color recortadas con una máscara (forma del vestido/traje/detalles).
    · overlay  = tiñe el vestido/traje conservando sombras y pliegues
    · color    = cambia el tono de cinta, ramo, corbatín, etc.
-   Los colores vienen de CONFIG.COLORES (variables --t-dress, --t-suit, --t-acc). Sin color = transparente = original. */
+   Los colores vienen de BODA.COLORES (variables --t-dress, --t-suit, --t-acc). Sin color = transparente = original. */
 .tn{display:none;position:absolute;inset:0;pointer-events:none;-webkit-mask-size:100% 100%;mask-size:100% 100%;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat}
 .fig.has.rc .tn{display:block}
 #bride .tv{background:var(--t-dress,transparent);mix-blend-mode:overlay;-webkit-mask-image:var(--m-novia-vestido);mask-image:var(--m-novia-vestido)}
@@ -243,8 +243,19 @@ body.edit #ed{display:flex}
 body.conimg .solo-svg{display:none}   /* piel/cabello solo sirven para el dibujo SVG */
 @media (prefers-reduced-motion:reduce){.brick,.arm,.hint,.heart.on,.spk,.mn,.lm,.lf,.load,.lg{animation:none}.brick{opacity:1}}
 </style>
+<link rel="stylesheet" href="css/detalles-boda.css">
+<script src="js/detalles-boda.js"></script>
 </head>
 <body>
+<div class="letter-intro" id="letter-intro" role="dialog" aria-modal="true" aria-labelledby="letter-title">
+ <div class="letter-intro-inner"><p class="letter-kicker t">UNA CARTA PARA TI</p><h2 class="n" id="letter-title">Samuel &amp; Nataly</h2><p class="letter-subtitle">Hay momentos que merecen compartirse.</p>
+ <button class="envelope" id="open-letter" type="button" aria-label="Abrir la carta y entrar a la invitación con música"><span class="letter-paper"><span class="n">Nos casamos</span><span>28 · 11 · 2026</span></span><span class="envelope-front"></span><span class="envelope-flap"></span><span class="envelope-seal">S &amp; N</span></button>
+ <p class="letter-instruction" id="letter-instruction">Toca el sello para abrir tu invitación</p><p class="letter-audio-note">Al abrirla, comenzará nuestra melodía.</p><button class="open-silent" id="open-silent" type="button">Abrir sin música</button></div>
+</div>
+<audio id="wedding-audio" src="audio/nuestro-comienzo.wav" loop preload="none"></audio>
+<div id="invitation-content" inert>
+<button id="music-toggle" type="button" aria-pressed="false" aria-label="Reproducir música"><span id="music-icon"></span><span id="music-label">Nuestra melodía</span></button>
+
 
 <!-- Barra del modo edición (solo aparece al activar el modo edición) -->
 <div id="ed"><span>✏️ Edición: toca las imágenes punteadas.</span>
@@ -284,9 +295,10 @@ body.conimg .solo-svg{display:none}   /* piel/cabello solo sirven para el dibujo
  <!-- ✏️ EDITA AQUÍ: mensaje de bienvenida -->
  <p style="max-width:28rem;margin:0 auto 1.6rem;line-height:1.7;color:var(--suave)">Con gran alegría en nuestros corazones, y junto a nuestras familias, tenemos el honor de invitarles a celebrar el inicio de nuestro matrimonio.</p>
  <!-- ✏️ EDITA AQUÍ: fecha, hora y lugares -->
- <div class="info">
+ <div class="countdown-wrap"><p class="count-heading" id="count-title">Falta muy poco para nuestro gran día</p><div class="countdown" role="group" aria-label="Cuenta regresiva para la boda"><div><strong id="cd-days">00</strong><span>Días</span></div><i>:</i><div><strong id="cd-hours">00</strong><span>Horas</span></div><i>:</i><div><strong id="cd-minutes">00</strong><span>Minutos</span></div><i>:</i><div><strong id="cd-seconds">00</strong><span>Segundos</span></div></div><p class="count-date">28 · NOVIEMBRE · 2026</p></div>
+<div class="info">
   <p>📅 <b>FECHA:</b> Sábado, 28 de Noviembre de 2026</p>
-  <p>⏰ <b>HORA:</b> 14:00 p.m.</p>
+  <p>⏰ <b>HORA:</b> 14:00</p>
   <p>📍 <b>CEREMONIA RELIGIOSA: </b>
     <span>
       <a href="https://www.google.com/maps/place/IGLESIA+FLORIDA+NORTE+U.C.E./@-17.3875713,-66.2240991,19.96z/data=!4m6!3m5!1s0x93e375c1457689a9:0x7ce1d167f4fdfba6!8m2!3d-17.3877023!4d-66.2243937!16s%2Fg%2F11rr3kwm92?entry=ttu&g_ep=EgoyMDI2MTAxNC4wIKXMDSoASAFQAw%3D%3D"> Iglesia Florida Norte</a>
@@ -328,8 +340,8 @@ body.conimg .solo-svg{display:none}   /* piel/cabello solo sirven para el dibujo
 <div class="zone" id="zone"><div class="stick">
  <h2 class="n">El comienzo de nuestra historia…</h2>
  <div class="stage">
-  <!-- 👰 NOVIA. Dibujo por defecto (clase "def"). Para usar tu imagen: CONFIG.IMAGENES.novia (PNG transparente).
-       Colores: CONFIG.COLORES (dr = vestido, ha = cabello, sk = piel, ac = detalles) -->
+  <!-- 👰 NOVIA. Dibujo por defecto (clase "def"). Para usar tu imagen: BODA.IMAGENES.novia (PNG transparente).
+       Colores: BODA.COLORES (dr = vestido, ha = cabello, sk = piel, ac = detalles) -->
   <div id="bride" class="fig" data-slot="novia"><i class="tn tv"></i><i class="tn td"></i><svg class="def" viewBox="0 0 100 200">
    <ellipse cx="50" cy="196" rx="30" ry="4" fill="#0002"/>                         <!-- sombra -->
     <path class="dr" opacity=".25" d="M36 20Q50 -2 64 20L84 150Q50 160 16 150Z"/>    <!-- velo -->
@@ -341,7 +353,7 @@ body.conimg .solo-svg{display:none}   /* piel/cabello solo sirven para el dibujo
    <path class="sks" d="M58 58Q78 72 92 100" stroke-width="5" fill="none" stroke-linecap="round"/><circle class="sk" cx="92" cy="100" r="6.5"/> <!-- brazo y mano -->
    <circle class="ac" cx="34" cy="104" r="6"/><circle cx="31" cy="101" r="3.5" fill="#fdba74"/><circle cx="38" cy="107" r="3" fill="#fb923c"/> <!-- ramo -->
   </svg></div>
-  <!-- 🤵 NOVIO. Misma lógica: CONFIG.IMAGENES.novio (PNG transparente) -->
+  <!-- 🤵 NOVIO. Misma lógica: BODA.IMAGENES.novio (PNG transparente) -->
   <div id="groom" class="fig" data-slot="novio"><i class="tn tt"></i><i class="tn td"></i><svg class="def" viewBox="0 0 100 200">
    <ellipse cx="50" cy="196" rx="28" ry="4" fill="#0002"/>                          <!-- sombra -->
    <path class="su" d="M30 130L48 130L50 192L33 192ZM52 130L70 130L67 192L50 192Z"/> <!-- pantalón -->
@@ -353,7 +365,7 @@ body.conimg .solo-svg{display:none}   /* piel/cabello solo sirven para el dibujo
    <path class="sus" d="M35 62Q20 80 8 100" stroke-width="7" fill="none" stroke-linecap="round"/><circle class="sk" cx="8" cy="100" r="6.5"/> <!-- brazo y mano -->
    <ellipse class="ha" cx="41" cy="193" rx="8" ry="3"/><ellipse class="ha" cx="59" cy="193" rx="8" ry="3"/> <!-- zapatos -->
   </svg></div>
-  <!-- ❤️ CORAZÓN. Emoji: CONFIG.EMOJI_CORAZON · Imagen propia: CONFIG.IMAGENES.corazon -->
+  <!-- ❤️ CORAZÓN. Emoji: BODA.EMOJI_CORAZON · Imagen propia: BODA.IMAGENES.corazon -->
   <div class="heart" id="heart" data-slot="corazon"><span class="def" id="hem">❤️</span></div>
  </div>
  <p class="thx" id="thx">¡Gracias por acompañarnos!</p>
@@ -383,10 +395,8 @@ body.conimg .solo-svg{display:none}   /* piel/cabello solo sirven para el dibujo
 
       <div class="linea-decorada"><span>🌿</span><h2 id="complemento" class="complemento n">Invitación para</h2><span>🌿</span></div>
 
-</div>
 
-
-      <p id="cantidad" class="tenue complemento" id="complemento" ></p>
+      <p id="cantidad" class="tenue complemento" ></p>
 
       <p id="estado" class="estado-grande"></p>
       <div id="botones" class="btns">
@@ -409,7 +419,7 @@ body.conimg .solo-svg{display:none}   /* piel/cabello solo sirven para el dibujo
 <section class="gift">
   <br>
   <br>
- <!-- Dibujo animado de fondo. Colores de los ladrillos: CONFIG.LADRILLOS. Otros colores: atributos fill="#..." -->
+ <!-- Dibujo animado de fondo. Colores de los ladrillos: BODA.LADRILLOS. Otros colores: atributos fill="#..." -->
  <div class="build" aria-hidden="true"><svg viewBox="0 0 520 300">
   <rect y="262" width="520" height="38" fill="#d6d3d1"/>                                  <!-- suelo -->
   <g id="bricks"></g>                                                                     <!-- paredes (se generan con JS) -->
@@ -478,7 +488,7 @@ body.conimg .solo-svg{display:none}   /* piel/cabello solo sirven para el dibujo
   <!-- ✏️ EDITA AQUÍ: mensaje de regalos -->
   <h2 class="n">Su presencia es un regalo</h2>
   <p style="line-height:1.7;color:var(--suave);margin:0">Pero toda ayuda para construir nuestro hogar y cumplir nuestros sueños es bienvenida.</p>
-  <!-- 💳 QR de depósito: sube la imagen de tu banco con CONFIG.IMAGENES.qrDeposito -->
+  <!-- 💳 QR de depósito: sube la imagen de tu banco con BODA.IMAGENES.qrDeposito -->
   <div class="qrbox" data-slot="qrDeposito"><span class="def">QR de depósito próximamente</span></div>
   <p class="small">Escanea el QR desde la app de tu banco.<br>¡Gracias por ser parte de nuestro hogar! 🏡</p>
  </div>
@@ -509,7 +519,7 @@ body.conimg .solo-svg{display:none}   /* piel/cabello solo sirven para el dibujo
 
   function abrir(ico, titulo, texto) {
     crearModal();
-    $('mrIco').textContent = ico;
+    $('mrIco').innerHTML=window.iconoBoda(titulo==='Ups…'?'alert':'heart');
     $('mrTit').textContent = titulo;
     $('mrTxt').textContent = texto;
     $('mrFondo').classList.add('on');
@@ -559,7 +569,7 @@ body.conimg .solo-svg{display:none}   /* piel/cabello solo sirven para el dibujo
      ║  ⚙️ CONFIG: AQUÍ CAMBIAS IMÁGENES, COLORES Y ENLACES              ║
      ╚═══════════════════════════════════════════════════════════════════╝ -->
 <script>
-const CONFIG = {
+const BODA = {
 
   /* 📸 Enlace de tu carpeta de Google Drive (compartida con "cualquier persona con el enlace").
         Con esto se genera el QR y se activan los botones. Déjalo '' para mostrar "se activará el día de la boda". */
@@ -613,7 +623,7 @@ document.addEventListener('DOMContentLoaded', function(){
  /* Guardado local (solo en TU navegador): LS('clave') lee, LS('clave',valor) guarda, LS('clave',null) borra */
  var LS = function(k,v){try{if(v===undefined)return localStorage.getItem(k);v===null?localStorage.removeItem(k):localStorage.setItem(k,v)}catch(e){}};
 
- /* 1) Colores de los novios: pasan de CONFIG.COLORES a las variables CSS */
+ /* 1) Colores de los novios: pasan de BODA.COLORES a las variables CSS */
  var MAPA = {dress:'vestido', suit:'traje', skin:'piel', hair:'cabello', acc:'detalles'};
  var CK = Object.keys(MAPA);
  /* Cambia un color: actualiza el dibujo SVG (--dress...) y el RECOLOREO CSS de las ilustraciones (--t-dress...) */
@@ -621,7 +631,7 @@ document.addEventListener('DOMContentLoaded', function(){
   var st=document.documentElement.style; st.setProperty('--'+n,v);
   if(n==='dress'||n==='suit'||n==='acc') st.setProperty('--t-'+n,v);
  }
- CK.forEach(function(n){var v=LS('c_'+n)||CONFIG.COLORES[MAPA[n]];if(v)setColor(n,v)});
+ CK.forEach(function(n){var v=LS('c_'+n)||BODA.COLORES[MAPA[n]];if(v)setColor(n,v)});
 
  /* 2) Flores de las esquinas (desde el bloque IMÁGENES al final) */
  Array.prototype.forEach.call(document.querySelectorAll('[data-esquina]'),function(im){im.src=ESQUINAS[im.dataset.esquina]});
@@ -629,14 +639,14 @@ document.addEventListener('DOMContentLoaded', function(){
  /* 3) Casa: genera 30 ladrillos (6 columnas x 5 filas) que aparecen uno tras otro */
  var s='', i=0;
  for(var r=4;r>=0;r--)for(var c=0;c<6;c++){
-  s+='<rect class="brick" x="'+(222+c*36)+'" y="'+(152+r*22)+'" width="34" height="20" rx="2" fill="'+CONFIG.LADRILLOS[(r+c)%CONFIG.LADRILLOS.length]+'" style="animation-delay:'+(i++*.25).toFixed(2)+'s"/>';
+  s+='<rect class="brick" x="'+(222+c*36)+'" y="'+(152+r*22)+'" width="34" height="20" rx="2" fill="'+BODA.LADRILLOS[(r+c)%BODA.LADRILLOS.length]+'" style="animation-delay:'+(i++*.25).toFixed(2)+'s"/>';
  }
  $('bricks').innerHTML=s;
 
  /* 4) Imágenes cambiables: cada elemento con data-slot="nombre" */
  function put(el,src,rc){var im=el.querySelector('img.up');if(!im){im=new Image();im.className='up';im.alt='';el.insertBefore(im,el.firstChild)}
  im.onload=function(){upd()};                                      /* al cargar la imagen, recalcula la posición de los novios */
- im.onerror=function(){el.classList.remove('has');im.remove();upd()}; /* si la ruta falla, vuelve al dibujo por defecto */
+ im.onerror=function(){var fallback=(typeof PERSONAJES!=='undefined')&&PERSONAJES[el.dataset.slot];if(fallback&&im.src!==fallback){im.src=fallback;return}el.classList.remove('has');im.remove();upd()}; /* si la ruta falla, vuelve al dibujo por defecto */
  im.src=src;el.classList.add('has');
  if(el.id==='bride'||el.id==='groom'){document.body.classList.add('conimg');el.classList.toggle('rc',!!rc)} /* rc = se pueden recolorear (máscaras CSS) */
 }
@@ -646,22 +656,22 @@ document.addEventListener('DOMContentLoaded', function(){
    c.getContext('2d').drawImage(im,0,0,c.width,c.height);cb(c.toDataURL('image/webp',.85))};im.src=r.result};r.readAsDataURL(f)}
  Array.prototype.forEach.call(document.querySelectorAll('[data-slot]'),function(el){
   var nombre=el.dataset.slot, k='img_'+nombre;
-  var src = LS(k) || CONFIG.IMAGENES[nombre] || (typeof PERSONAJES!=='undefined' && PERSONAJES[nombre]); /* prioridad: tu edición > CONFIG > imágenes incluidas */
-  if(src) put(el,src, CONFIG.RECOLOREO && !LS(k));   /* tu foto subida en modo edición no usa las máscaras */
+  var src = LS(k) || BODA.IMAGENES[nombre] || (typeof PERSONAJES!=='undefined' && PERSONAJES[nombre]); /* prioridad: tu edición > CONFIG > imágenes incluidas */
+  if(src) put(el,src, BODA.RECOLOREO && !LS(k));   /* tu foto subida en modo edición no usa las máscaras */
   var p=document.createElement('input');p.type='file';p.accept='image/*';p.className='pick';p.setAttribute('aria-label','Cambiar imagen');
   p.onchange=function(){if(p.files[0])shrink(p.files[0],600,function(d){put(el,d,false);LS(k,d)})};
   el.appendChild(p);                                   /* el selector de archivo solo se ve en modo edición */
  });
 
  /* 5) Emoji del corazón */
- $('hem').textContent = LS('emoji') || CONFIG.EMOJI_CORAZON;
+ $('hem').innerHTML=window.iconoBoda('heart');
 
 
- $('dl').onchange=function(){LS('drive',this.value.trim());setDrive(this.value.trim())};
+ $('dl').onchange=function(){LS('drive',this.value.trim());void 0};
  CK.forEach(function(n){var el=$('c_'+n);el.value=getComputedStyle(document.documentElement).getPropertyValue('--'+n).trim();
   el.oninput=function(){setColor(n,el.value);LS('c_'+n,el.value)}});
  $('he').value=$('hem').textContent;
- $('he').oninput=function(){$('hem').textContent=this.value||'❤️';LS('emoji',this.value)};
+ $('he').closest('label').hidden=true;
  $('rs').onclick=function(){ /* Restablecer: borra TUS cambios locales y vuelve a CONFIG */
   ['img_foto','img_novia','img_novio','img_corazon','img_qrDeposito','drive','emoji'].concat(CK.map(function(n){return 'c_'+n})).forEach(function(k){LS(k,null)});
   location.reload()};
@@ -706,7 +716,7 @@ const ESQUINAS = {
 
 <!-- ╔═══════════════════════════════════════════════════════════════════╗
      ║  👰🤵 ILUSTRACIÓN DE LOS NOVIOS (acuarela, en base64) — NO TOCAR   ║
-     ║  Para usar otra: escribe una ruta en CONFIG.IMAGENES (arriba).    ║
+     ║  Para usar otra: escribe una ruta en BODA.IMAGENES (arriba).    ║
      ║  Para volver al dibujo SVG: deja este bloque como  PERSONAJES={}  ║
      ╚═══════════════════════════════════════════════════════════════════╝ -->
 <script>
@@ -728,5 +738,6 @@ const PERSONAJES = {
 <script src="js/config.js"></script>
 <script src="js/supabase.js"></script>
 <script src="js/invitacion.js"></script>
+</div>
 </body>
 </html>

@@ -5,8 +5,9 @@ let datos;
 const fmt = (f) => new Date(f).toLocaleString('es-BO', { dateStyle: 'long', timeStyle: 'short' });
 
 async function cargar() {
-  if (!token) return mostrarError();
-  const { data, error } = await db.rpc('obtener_invitado', { p_token: token });
+  if (!token) { $('#cargando').hidden=true; $('#error').hidden=false; $('#error h1').textContent='Nos encantará verte'; $('#error p').textContent='Para confirmar tu asistencia, abre el enlace personal que te enviamos.'; return; }
+  let resultado; try { resultado=await db.rpc('obtener_invitado', { p_token: token }); } catch { return mostrarError(); }
+  const { data, error } = resultado;
   if (error || !data?.length) return mostrarError();
   datos = data[0]; pintar();
 }
@@ -22,7 +23,7 @@ function pintar() {
   comp.textContent = datos.complemento ?? '';
   comp.hidden = !datos.complemento;
 
-  console.log(datos.nombres);
+
   
 
   const n = datos.cantidad ?? 1;
@@ -38,9 +39,17 @@ function pintar() {
 
 
 async function responder(valor) {
-  const { error } = await db.rpc('confirmar_reserva', { p_token: token, p_reserva: valor });
-  $('#mensaje').textContent = error ? error.message : valor ? ' Agradecemos tu confirmación y nos vemos muy pronto para celebrar juntos.' : 'Agradecemos sinceramente que nos hayas notificado.';
-  if (!error) await cargar();
+  const botones=Array.from(document.querySelectorAll('#botones button'));
+  botones.forEach(b=>b.disabled=true);
+  $('#mensaje').textContent='Guardando tu respuesta…';
+  try {
+    const { error } = await db.rpc('confirmar_reserva', { p_token: token, p_reserva: valor });
+    if(error) throw error;
+    await cargar();
+    const texto=valor?'Agradecemos tu confirmación. ¡Nos vemos muy pronto para celebrar juntos!':'Agradecemos sinceramente que nos hayas notificado.';
+    $('#mensaje').textContent=texto;
+  } catch(error) { $('#mensaje').textContent=error.message || 'No pudimos guardar la respuesta. Intenta nuevamente.'; }
+  finally { botones.forEach(b=>b.disabled=false); }
 }
 
 $('#btn-si').onclick = () => responder(true);
