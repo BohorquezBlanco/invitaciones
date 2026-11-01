@@ -30,7 +30,14 @@ function pintar() {
   $('#cantidad').textContent = n === 1 ? 'Invitación para 1 persona' : `Invitación para ${n} personas`;
 
   $('#estado').textContent = !datos.fecha_reserva ? 'Confirmar porfavor su asistencia presionando el boton'
-    : datos.reserva ? 'Asistencia confirmada con éxito.' : 'Lamentamos que no puedas acompañarnos.';
+    : datos.reserva ? 'Agradecemos tu confirmación. ¡Nos vemos muy pronto para celebrar juntos!' : 'Lamentamos que no puedas acompañarnos.';
+
+
+    
+  $('#mrTxt').textContent = !datos.fecha_reserva ? 'Confirmar porfavor su asistencia presionando el boton'
+    : datos.reserva ? 'Agradecemos tu confirmación. ¡Nos vemos muy pronto para celebrar juntos!' : 'Lamentamos que no puedas acompañarnos.';
+
+ 
   $('#limite').textContent = datos.puede_modificar
     ? `Puedes cambiar tu respuesta hasta el ${fmt(datos.fecha_limite)}.`
     : 'El plazo para responder ya terminó.';

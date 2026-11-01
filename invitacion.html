@@ -241,7 +241,7 @@ body.edit #ed{display:flex}
 #ed input.em{width:3.4rem;text-align:center}
 .cp{display:inline-flex;align-items:center;gap:.25rem}
 body.conimg .solo-svg{display:none}   /* piel/cabello solo sirven para el dibujo SVG */
-@media (prefers-reduced-motion:reduce){.brick,.arm,.hint,.heart.on,.spk,.mn,.lm,.lf,.load,.lg{animation:none}.brick{opacity:1}}
+@media (prefers-reduced-motion:reduce){.brick,.arm,.hint,.heart.on,.spk,.mn,.lm,.lf,.load,.lg{animation:none}.brick{opacity:1}} -----*/
 </style>
 <link rel="stylesheet" href="css/detalles-boda.css">
 <script src="js/detalles-boda.js"></script>
@@ -528,13 +528,19 @@ body.conimg .solo-svg{display:none}   /* piel/cabello solo sirven para el dibujo
     var f = $('mrFondo');
     if (f) f.classList.remove('on');
   }
+window.mostrarModal = function (texto) {
+  var t = (texto || '').toLowerCase();
 
-  window.mostrarModal = function (texto) {
-    var t = (texto || '').toLowerCase();
-    if (t.indexOf('confirmaci') !== -1)      abrir('🎉', '¡Gracias!', texto);
-    else if (t.indexOf('notificado') !== -1) abrir('💌', 'Gracias por avisarnos', texto);
-    else                                     abrir('⚠️', 'Ups…', texto);
-  };
+  var esError = /error|no se pudo|no válid|inválid|límite|limite|fall|intenta|ups/.test(t);
+  var esNo    = /notificado|avisar|no podr|no asist/.test(t);
+
+  if (esError)    abrir('⚠️', 'Ups…', texto);
+  else if (esNo)  abrir('💌', 'Gracias por avisarnos', texto);
+  else            abrir('🎉', '¡Gracias!', texto);
+};
+
+
+  
 
   function revisar() {
     var m = $('mensaje');
@@ -604,10 +610,10 @@ const BODA = {
           · detalles = cinta, ramo, corbatín, chaleco, flor y pañuelo del novio
         piel / cabello → solo para el dibujo SVG por defecto (si dejas PERSONAJES={}). */
   COLORES: {
-    vestido:  '#7c3aed',          // ej: '#7c3aed' (morado), '#f5f5f4' (blanco roto)
-    traje:    '',          // ej: '#1e3a8a' (azul marino)
+    vestido:  '#f5f5f4',          // ej: '#7c3aed' (morado), '#f5f5f4' (blanco roto)
+    traje:    '#1e3a8a',          // ej: '#1e3a8a' (azul marino)
     detalles: '',          // ej: '#0d9488' (turquesa)
-    piel:     '#374151',   // solo dibujo SVG
+    piel:     '#0000',   // solo dibujo SVG
     cabello:  '#111827'    // solo dibujo SVG
   },
 
@@ -677,9 +683,11 @@ document.addEventListener('DOMContentLoaded', function(){
   location.reload()};
  $('ex').onclick=function(){document.body.classList.remove('edit');upd()};
  if(location.hash==='#editar')document.body.classList.add('edit');
- var tp=0,tm; /* 5 toques en los nombres = activar/desactivar modo edición */
- $('tt').addEventListener('click',function(){tp++;clearTimeout(tm);tm=setTimeout(function(){tp=0},2500);
-  if(tp>=5){tp=0;document.body.classList.toggle('edit');upd()}});
+ /*
+var tp=0,tm;
+$('tt').addEventListener('click',function(){tp++;clearTimeout(tm);tm=setTimeout(function(){tp=0},2500);
+ if(tp>=5){tp=0;document.body.classList.toggle('edit');upd()}});
+*/
 
  /* 8) Los novios se acercan al hacer scroll y se toman de la mano */
  var z=$('zone'),b=$('bride'),m=$('groom'),hr=$('heart'),tx=$('thx');

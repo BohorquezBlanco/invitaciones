@@ -28,5 +28,5 @@ document.addEventListener('DOMContentLoaded',()=>{
  }
  document.getElementById('open-letter').addEventListener('click',()=>openLetter(true));
  document.getElementById('open-silent').addEventListener('click',()=>openLetter(false));
- if(location.hash==='#editar'){intro.hidden=true;content.inert=false;document.body.classList.add('letter-open');}else document.getElementById('open-letter').focus({preventScroll:true});
+// if(location.hash==='#editar'){intro.hidden=true;content.inert=false;document.body.classList.add('letter-open');}else document.getElementById('open-letter').focus({preventScroll:true});
 });
