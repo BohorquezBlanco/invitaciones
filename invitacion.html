@@ -24,7 +24,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Great+Vibes&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
 <!-- Librería que genera el QR del álbum de fotos a partir del enlace de Drive -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-
+<link rel="stylesheet" href="css/radio.css">
 <style>
 
  
@@ -247,14 +247,34 @@ body.conimg .solo-svg{display:none}   /* piel/cabello solo sirven para el dibujo
 <script src="js/detalles-boda.js"></script>
 </head>
 <body>
+
+<!-- ============================================================
+     3) HTML DE LA RADIO — pégalo antes de </body>
+     ============================================================ -->
+<button class="fab" id="radioBtn" aria-label="Abrir radio">
+  <svg viewBox="0 0 48 48" width="34" height="34" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M14 12 34 4"/><rect x="5" y="12" width="38" height="28" rx="6"/><circle cx="19" cy="26" r="8"/><path d="M15 23h8M15 26h8M15 29h8" stroke-width="1.6"/><circle cx="35" cy="21" r="3.2"/><path d="M31 31h8M31 35h8" stroke-width="1.6"/></svg>
+</button>
+
+<div id="radio" aria-hidden="true">
+  <div class="screen"><div class="f" id="freq">88.0</div><div class="n" id="name">Gira la perilla…</div></div>
+  <div class="dial" id="dial"></div>
+  <input type="range" id="tuner" min="880" max="1080" step="1" value="880" aria-label="Sintonizar">
+  <div class="chips" id="chips"></div>
+  <div class="pw"><span>Radio nupcial</span><button id="pwr">Encender</button></div>
+</div>
+
 <div class="letter-intro" id="letter-intro" role="dialog" aria-modal="true" aria-labelledby="letter-title">
  <div class="letter-intro-inner"><p class="letter-kicker t">UNA CARTA PARA TI</p><h2 class="n" id="letter-title">Samuel &amp; Nataly</h2><p class="letter-subtitle">Hay momentos que merecen compartirse.</p>
  <button class="envelope" id="open-letter" type="button" aria-label="Abrir la carta y entrar a la invitación con música"><span class="letter-paper"><span class="n">Nos casamos</span><span>28 · 11 · 2026</span></span><span class="envelope-front"></span><span class="envelope-flap"></span><span class="envelope-seal">S &amp; N</span></button>
  <p class="letter-instruction" id="letter-instruction">Toca el sello para abrir tu invitación</p><p class="letter-audio-note">Al abrirla, comenzará nuestra melodía.</p><button class="open-silent" id="open-silent" type="button">Abrir sin música</button></div>
 </div>
-<audio id="wedding-audio" src="audio/nuestro-comienzo.wav" loop preload="none"></audio>
+
+<audio id="wedding-audio" src="" loop preload="none"></audio>
 <div id="invitation-content" inert>
-<button id="music-toggle" type="button" aria-pressed="false" aria-label="Reproducir música"><span id="music-icon"></span><span id="music-label">Nuestra melodía</span></button>
+<button id="music-toggle" type="button" aria-pressed="false" aria-label="Reproducir música">
+  <span id="music-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18V5l11-3v13 M9 5v4l11-3 M9 18c0 4-7 4-7 0s7-4 7 0 M20 15c0 4-7 4-7 0s7-4 7 0"></path></svg></span>
+  <span id="music-icon"></span><span id="music-label">Nuestra melodía</span>
+</button>
 
 
 <!-- Barra del modo edición (solo aparece al activar el modo edición) -->
@@ -493,7 +513,7 @@ body.conimg .solo-svg{display:none}   /* piel/cabello solo sirven para el dibujo
   <p class="small">Escanea el QR desde la app de tu banco.<br>¡Gracias por ser parte de nuestro hogar! 🏡</p>
  </div>
 </section>
-
+<script src="js/radio.js"></script>
 <script>
 (function () {
   // Crea el modal si no existe
@@ -595,7 +615,7 @@ const BODA = {
     foto:       'img/fotiito.png',   // círculo con la foto de ustedes (portada)
     novia:      'img/novia.png',   // imagen de la novia
     novio:      'img/novio.png',   // imagen del novio
-    corazon:    '',   // imagen en lugar del emoji de corazón
+    corazon:    'corazon1.png',   // imagen en lugar del emoji de corazón
     qrDeposito: 'img/qr3.jpeg'    // QR de tu banco para los depósitos
   },
 
